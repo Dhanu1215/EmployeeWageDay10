@@ -1,17 +1,36 @@
 package com.blp.employeewage;
 
+/**
+ * Compute  total employee wage for each company
+ */
 public class EmployeeWage {
 
     //Declaration of Constant variables
     public static final int EMP_FULL_TIME_HOUR = 1;
     public static final int EMP_PART_TIME_HOUR = 2;
+    private final String company;
+    private final int EMP_WAGE_PER_HOUR;
+    private final int NUM_WORKING_DAY;
+    private final int EMP_MONTHLY_WORKING_HOUR;
+    private int totalEmpWage;
 
-    public static void main(String[] args) {
-        computeEmpWage("De-mart", 20, 2, 10);
-        computeEmpWage("Reliance", 10, 4, 20);
+    public EmployeeWage(String company, int emp_wage_per_hour, int num_working_day, int emp_monthly_working_hour) {
+        this.company = company;
+        EMP_WAGE_PER_HOUR = emp_wage_per_hour;
+        NUM_WORKING_DAY = num_working_day;
+        EMP_MONTHLY_WORKING_HOUR = emp_monthly_working_hour;
     }
 
-    private static int computeEmpWage(String company, int EMP_WAGE_PER_HOUR, int NUM_WORKING_DAY, int EMP_MONTHLY_WORKING_HOUR) {
+    public static void main(String[] args) {
+        EmployeeWage dMart = new EmployeeWage("De-mart", 20, 2, 10);
+        EmployeeWage reliance = new EmployeeWage("Reliance", 10, 4, 20);
+        dMart.computeEmpWage();
+        System.out.println(dMart);
+        reliance.computeEmpWage();
+        System.out.println(reliance);
+    }
+
+    private void computeEmpWage() {
         //Declaration of variables
         int empHours;
         int totalEmpHrs = 0;
@@ -36,8 +55,12 @@ public class EmployeeWage {
             totalEmpHrs += empHours;
             System.out.println("Day:" + totalWorkingDays + " " + "Emp Hr:" + empHours);
         }
-        int totalEmpWage = totalEmpHrs * EMP_WAGE_PER_HOUR;
-        System.out.println("Total Emp Wage For Company  = " + company + " is: " + totalEmpWage);
-        return (totalEmpWage);
+        totalEmpWage = totalEmpHrs * EMP_WAGE_PER_HOUR;
+    }
+
+    @Override
+    public String toString() {
+        return "Total emp wage for company: " + company + " is: " + totalEmpWage;
     }
 }
+
